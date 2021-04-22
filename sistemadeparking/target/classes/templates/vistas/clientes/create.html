@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org/" >
+<title>Formulario Clientes</title>
+
+<head th:replace="plantilla/template ::head">
+</head>
+
+
+<body>
+    <header th:replace="plantilla/template :: header"></header>
+	<br>
+	<div class="container">
+
+
+		<div class="card bg-light">
+			<div class="card-header bg-dark text-white" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="card-body">
+					<!-- Alerta informa -->
+					<div id="alerta" class="alert alert-info alert-dismissible fade show text-center" role="alert">
+						<span id="mensaje">Ingrese un RUT en el siguiente campo de texto para validar
+							si es correcto o no.</span>
+					</div>
+					<!-- FIN ALERTA -->
+
+					<form th:action="@{/vistas/clientes/save}" th:object="${clientes}" method="POST" autocomplete="off">
+						<div class="form-group row">
+							<input type="hidden" th:field="*{id}">
+							<label class="col-md-2" for="rut">RUT: </label>
+							<input type="text" id="rut" name="rut" th:field="*{rut}" onkeypress="return isNumber(event)"
+								onchange="checkRut(this)" class="form-control form-control-sm col-md-6"
+								placeholder="Rut del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('rut')}"
+								th:errors="*{rut}"></small>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2" for="nombres">Nombres: </label>
+							<input type="text" th:field="*{nombres}" class="form-control form-control-sm col-md-6"
+								id="nombres" placeholder="Nombres del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}"
+								th:errors="*{nombres}"></small>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2" for="apellidos">Apellidos: </label>
+							<input type="text" th:field="*{apellidos}" class="form-control form-control-sm col-md-6"
+								id="apellidos" placeholder="Apellidos del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('apellidos')}"
+								th:errors="*{apellidos}"></small>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2" for="direccion">Direccion: </label>
+							<input type="text" th:field="*{direccion}" class="form-control form-control-sm col-md-6"
+								id="direccion" placeholder="Direccion del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}"
+								th:errors="*{direccion}"></small>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2" for="telefono">Telefono: </label>
+							<input type="text" th:field="*{telefono}" class="form-control form-control-sm col-md-6"
+								id="telefono" placeholder="Telefono del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}"
+								th:errors="*{telefono}"></small>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2" for="email">Email: </label>
+							<input type="email" th:field="*{email}" class="form-control form-control-sm col-md-6"
+								id="email" placeholder="Email del Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></small>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-md-2" for="comunas">Ciudad: </label>
+							<select th:field="*{comuna.id}" class="form-control form-control-sm col-md-6" id="comunas">
+								<option th:each="c:${comunas}" th:value="${c.id}" th:text="${c.nombres}"></option>
+							</select>
+							<a class="btn btn-primary btn-sm" th:href="@{'/vistas/comunas/'}" th:text="'Crear Comuna'"
+								style="margin-top: 1px;"></a>
+						</div>
+				</div>
+
+				<div>
+					<td>
+						<button class="btn btn-success " type="submit"
+							style="width: auto;height: auto;">Guardar</button>
+
+					</td>
+					<td>
+						<a class="btn btn-warning" th:href="@{'/vistas/clientes/'}" th:text="'Volver'"
+							style="width: auto;height: auto;float: right;"></a>
+					</td>
+
+				</div>
+
+
+				</form>
+			</div>
+		</div>
+
+
+		<script th:src="@{/js/validador.js}"></script>
+	    <footer th:replace="plantilla/template :: footer"></footer>
+
+
+
+</body>
+
+</html>

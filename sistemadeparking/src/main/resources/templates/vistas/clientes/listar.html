@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org/">
+<title>Listado de clientes</title>
+
+<head th:replace="plantilla/template ::head">
+</head>
+
+<body>
+    <header th:replace="plantilla/template :: header"></header>
+    <div class="text-center">Listado de Clientes</div>
+
+    <div class="container">
+        <a class="btn btn-warning" th:href="@{/vistas/clientes/crear}" th:text="'Crear nuevo cliente'"
+            title="Crear Nuevo Cliente">
+        </a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">RUT</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Cargo</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" c : ${clientes}">
+                    <th scope="row" th:text="${c.rut}"></th>
+                    <td th:text="${c.nombres}"></td>
+                    <td th:text="${c.apellidos}"></td>
+                    <td th:text="${c.telefono}"></td>
+                    <td th:text="${c.telefono}"></td>
+                    <td th:text="${c.correo}"></td>
+                    <td th:text="${c.direccion}"></td>
+                    <td th:text="${c.cargo.cargo}"></td>
+
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <footer th:replace="plantilla/template :: footer"></footer>
+
+</body>

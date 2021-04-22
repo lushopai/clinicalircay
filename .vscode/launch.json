@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SistemadeparkingApplication<sistemadeparking>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.clinicalircay.sistemadeparking.SistemadeparkingApplication",
+            "projectName": "sistemadeparking",
+            "args": ""
+        }
+    ]
+}
