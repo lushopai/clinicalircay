@@ -2,7 +2,6 @@ package com.clinicalircay.sistemadeparking.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "clientes")
@@ -21,22 +18,22 @@ public class Clientes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotEmpty(message = "campo requerido")
-    @Column(nullable = false,length = 12, unique = true)
-    @Size(min = 9,max = 12)
     private String rut;
-    @NotEmpty(message = "campo requerido")
     private String nombres;
-    @NotEmpty(message = "campo requerido")
     private String  apellidos;
     private Long telefono;
     private String correo;
     private String direccion;
 
 
+
     @ManyToOne
     @JoinColumn
     private Cargos cargo;
+
+    @ManyToOne
+    @JoinColumn
+    private Area area;
 
 
 
@@ -88,6 +85,14 @@ public class Clientes implements Serializable {
     public void setCargo(Cargos cargo) {
         this.cargo = cargo;
     }
+    public Area getArea() {
+        return area;
+    }
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    
 
     
     
