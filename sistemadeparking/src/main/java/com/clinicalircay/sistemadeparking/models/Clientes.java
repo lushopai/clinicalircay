@@ -24,6 +24,9 @@ public class Clientes implements Serializable {
     private Long telefono;
     private String correo;
     private String direccion;
+    private String beneficiario;
+    private String comentarios;
+    private  Long descuento_plantilla;
 
 
 
@@ -91,6 +94,26 @@ public class Clientes implements Serializable {
     public void setArea(Area area) {
         this.area = area;
     }
+    public String getBeneficiario() {
+        return beneficiario;
+    }
+    public void setBeneficiario(String beneficiario) {
+        this.beneficiario = beneficiario;
+    }
+    public String getComentarios() {
+        return comentarios;
+    }
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+    public Long getDescuento_plantilla() {
+        return descuento_plantilla;
+    }
+    public void setDescuento_plantilla(Long descuento_plantilla) {
+        this.descuento_plantilla = descuento_plantilla;
+    }
+
+    
 
     
 

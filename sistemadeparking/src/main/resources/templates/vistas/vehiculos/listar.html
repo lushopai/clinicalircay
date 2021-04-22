@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org/">
+<title>Listado de vehiculos</title>
+
+<head th:replace="plantilla/template ::head">
+</head>
+
+<body>
+    <header th:replace="plantilla/template :: header"></header>
+    <div class="text-center">Listado de vehiculos</div>
+
+    <div class="container">
+        <a class="btn btn-warning" th:href="@{/vistas/vehiculos/crear}" th:text="'Registrar nuevo vehiculo'"
+            title="Registrar Nuevo Cliente">
+        </a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha de registro</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Tipo</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" v : ${vehiculos}">
+                    <th scope="row" th:text="${v.id}"></th>
+                    <td th:text="${v.fecharegistro}"></td>
+                    <td th:text="${v.cliente.id}"></td>
+                    <td th:text="${v.patente}"></td>
+                    <td th:text="${v.marca.marca}"></td>
+                    <td th:text="${v.modelo}"></td>
+                    <td th:text="${v.tipo_Vehiculo.tipo_vehiculo}"></td>
+
+
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <footer th:replace="plantilla/template :: footer"></footer>
+
+</body>

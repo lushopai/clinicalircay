@@ -36,10 +36,14 @@ public class ClienteController {
     @Autowired
     private AreaService as;
 
+    @Autowired
+    private CargosService cc;
+
     @GetMapping("/")
     public String ListadoClientes(Model model) {
 
         List<Clientes> listadoclientes = cs.mostrar();
+        model.addAttribute("cargos", new Cargos());
         model.addAttribute("clientes", listadoclientes);
         return "/vistas/clientes/listar";
     }
@@ -50,6 +54,7 @@ public class ClienteController {
         List<Area> listaareas = as.mostrar();
         model.addAttribute("titulo", "Formulario: Crear Cliente");
         model.addAttribute("clientes", new Clientes());
+      
         model.addAttribute("areas", listaareas);
         model.addAttribute("cargos", listacargos);
         return "/vistas/clientes/create";
@@ -69,6 +74,28 @@ public class ClienteController {
         }
         try {
             cs.save(clientes);
+            attribute.addFlashAttribute("success", "Cliente guardado con exito");
+            return "redirect:/vistas/clientes/";
+        } catch (DataIntegrityViolationException e) {
+            System.out.println(e);
+            attribute.addFlashAttribute("error", "Cliente ya existe en el sistema");
+            return "redirect:/vistas/clientes/";
+
+        }
+
+    }
+
+
+    @PostMapping("/savecargo")
+    public String save2(@Valid @ModelAttribute Cargos cargos, BindingResult result, Model model,
+            RedirectAttributes attribute) {
+        if (result.hasErrors()) {
+            model.addAttribute("titulo", "Formulario: Crear Cliente");
+            System.out.println(result);
+            return "/vistas/clientes/create";
+        }
+        try {
+            cc.save(cargos);
             attribute.addFlashAttribute("success", "Cliente guardado con exito");
             return "redirect:/vistas/clientes/";
         } catch (DataIntegrityViolationException e) {
