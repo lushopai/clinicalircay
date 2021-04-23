@@ -41,9 +41,14 @@ public class ClienteController {
 
     @GetMapping("/")
     public String ListadoClientes(Model model) {
+        List<Cargos> listacargos = cargoservice.mostrar();
+        List<Area> listaareas = as.mostrar();
+        model.addAttribute("areas", listaareas);
+        model.addAttribute("car", listacargos);
 
         List<Clientes> listadoclientes = cs.mostrar();
         model.addAttribute("cargos", new Cargos());
+        model.addAttribute("cli", new Clientes());
         model.addAttribute("clientes", listadoclientes);
         return "/vistas/clientes/listar";
     }

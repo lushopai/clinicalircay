@@ -7,12 +7,16 @@
 
 <body>
     <header th:replace="plantilla/template :: header"></header>
-    <div class="text-center">Listado de vehiculos</div>
 
     <div class="container">
-        <a class="btn btn-warning" th:href="@{/vistas/vehiculos/crear}" th:text="'Registrar nuevo vehiculo'"
-            title="Registrar Nuevo Cliente">
-        </a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">Registrar
+            Vehiculo</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar
+            Marcas</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar
+            Tipo Vehiculo</button>
+            <div class="text-center">Listado de vehiculos</div>
+
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -43,6 +47,106 @@
 
             </tbody>
         </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Registro Marcas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/vistas/vehiculos/savemarca}" th:object="${marcas}" method="POST">
+                            <div class="mb-3">
+                                <input type="hidden" th:field="*{id}">
+                                <label for="recipient-name" class="col-form-label">Marca:</label>
+                                <input type="text" class="form-control" id="marca" name="marca" th:field="*{marca}"
+                                    required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Registro Tipo de Vehiculo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/vistas/vehiculos/savetipo}" th:object="${tipo}" method="POST">
+                            <div class="mb-3">
+                                <input type="hidden" th:field="*{id}">
+                                <label for="recipient-name" class="col-form-label">Tipo de Vehiculo:</label>
+                                <input type="text" class="form-control" id="tipo_vehiculo" name="tipo_vehiculo"
+                                    th:field="*{tipo_vehiculo}" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Registro Vehiculos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/vistas/vehiculos/savevehiculo}" th:object="${vehi}" method="POST">
+                        <div class="mb-3">
+                            <input type="hidden" th:field="*{id}">
+                            <label for="recipient-name" class="col-form-label">Modelo:</label>
+                            <input type="text" class="form-control" id="modelo" name="modelo"
+                                th:field="*{modelo}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Patente:</label>
+                            <input type="text" class="form-control" id="patente" name="patente"
+                                th:field="*{patente}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-md-2" for="cargos">Clientes: </label>
+                            <select th:field="*{cliente.id}" class="form-control form-control-sm col-md-6" id="cliente">
+                              <option th:each="c:${lisclientes}" th:value="${c.id}" th:text="${c.nombres}"></option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label class="col-md-2" for="cargos">Marca: </label>
+                            <select th:field="*{marca.id}" class="form-control form-control-sm col-md-6" id="marca">
+                              <option th:each="c:${lismarcas}" th:value="${c.id}" th:text="${c.marca}"></option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label class="col-md-2" for="tipo_vehiculo">Tipo: </label>
+                            <select th:field="*{tipo_Vehiculo.id}" class="form-control form-control-sm col-md-6" id="tipo_vehiculo">
+                              <option th:each="c:${listipo}" th:value="${c.id}" th:text="${c.tipo_vehiculo}"></option>
+                            </select>
+                          </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
