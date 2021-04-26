@@ -39,6 +39,8 @@ public class ClienteController {
     @Autowired
     private CargosService cc;
 
+
+
     @GetMapping("/")
     public String ListadoClientes(Model model) {
         List<Cargos> listacargos = cargoservice.mostrar();
@@ -49,6 +51,7 @@ public class ClienteController {
         List<Clientes> listadoclientes = cs.mostrar();
         model.addAttribute("cargos", new Cargos());
         model.addAttribute("cli", new Clientes());
+        model.addAttribute("are", new Area());
         model.addAttribute("clientes", listadoclientes);
         return "/vistas/clientes/listar";
     }
@@ -106,6 +109,26 @@ public class ClienteController {
         } catch (DataIntegrityViolationException e) {
             System.out.println(e);
             attribute.addFlashAttribute("error", "Cliente ya existe en el sistema");
+            return "redirect:/vistas/clientes/";
+
+        }
+
+    }
+
+    @PostMapping("/savearea")
+    public String save5645(@Valid @ModelAttribute Area area, BindingResult result, Model model,
+            RedirectAttributes attribute) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            return "/vistas/clientes/create";
+        }
+        try {
+            as.save(area);
+            attribute.addFlashAttribute("success", "Area guardado con exito");
+            return "redirect:/vistas/clientes/";
+        } catch (DataIntegrityViolationException e) {
+            System.out.println(e);
+            attribute.addFlashAttribute("error", "Area ya existe en el sistema");
             return "redirect:/vistas/clientes/";
 
         }
