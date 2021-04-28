@@ -16,7 +16,16 @@ public class Area  implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String area;
+    private String prueba;
+    
+
+    public String getPrueba() {
+        return prueba;
+    }
+
+    public void setPrueba(String prueba) {
+        this.prueba = prueba;
+    }
 
     public Long getId() {
         return id;
@@ -26,14 +35,7 @@ public class Area  implements Serializable{
         this.id = id;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
+  
     
     
 

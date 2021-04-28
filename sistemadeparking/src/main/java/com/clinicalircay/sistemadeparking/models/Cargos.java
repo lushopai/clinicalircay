@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +23,13 @@ public class Cargos  implements Serializable{
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
+
+
+    
+    @PrePersist 
+    public void PrePersist() {
+        fecha = new Date();
+    }
 
 
     public Long getId() {

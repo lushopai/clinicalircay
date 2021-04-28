@@ -7,7 +7,6 @@
 
 <body>
   <header th:replace="plantilla/template :: header"></header>
-  <div class="text-center">Listado de Clientes</div>
 
   <div class="container">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar
@@ -16,6 +15,8 @@
       Cargos</button>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">Registrar
         Areas</button>
+        <div class="text-center">Listado de Clientes</div>
+
 
     <table class="table table-hover">
       <thead>
@@ -23,9 +24,6 @@
           <th scope="col">#</th>
           <th scope="col">Nombres</th>
           <th scope="col">Apellidos</th>
-          <th scope="col">Telefono</th>
-          <th scope="col">Correo</th>
-          <th scope="col">Direccion</th>
           <th scope="col">Cargo</th>
           <th scope="col">Area</th>
           <th scope="col">Beneficiario</th>
@@ -36,14 +34,11 @@
       </thead>
       <tbody>
         <tr th:each=" c : ${clientes}">
-          <th scope="row" th:text="${c.rut}"></th>
+          <td th:text="${c.id}"></td>
           <td th:text="${c.nombres}"></td>
           <td th:text="${c.apellidos}"></td>
-          <td th:text="${c.telefono}"></td>
-          <td th:text="${c.correo}"></td>
-          <td th:text="${c.direccion}"></td>
           <td th:text="${c.cargo.cargo}"></td>
-          <td th:text="${c.area.area}"></td>
+          <td th:text="${c.area.prueba}"></td>
           <td th:text="${c.beneficiario}"></td>
 
 
@@ -65,7 +60,7 @@
               <div class="mb-3">
                 <input type="hidden" th:field="*{id}">
                 <label for="recipient-name" class="col-form-label">Cargo:</label>
-                <input type="text" class="form-control" id="cargo" name="cargo" th:field="*{cargo}">
+                <input type="text" class="form-control" id="cargo" name="cargo" th:field="*{cargo}" autofocus>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -88,28 +83,20 @@
             <form th:action="@{/vistas/clientes/save}" th:object="${cli}" method="POST">
               <div class="mb-3">
                 <input type="hidden" th:field="*{id}">
-                <label for="recipient-name" class="col-form-label">RUT:</label>
-                <input type="text" class="form-control" id="rut" name="rut" th:field="*{rut}">
               </div>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Nombres:</label>
-                <input type="text" class="form-control" id="nombres" name="nombres" th:field="*{nombres}">
+                <input type="text" class="form-control" id="nombres" name="nombres" th:field="*{nombres}" required>
               </div>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Apellidos:</label>
-                <input type="text" class="form-control" id="apellidos" name="apellidos" th:field="*{apellidos}">
+                <input type="text" class="form-control" id="apellidos" name="apellidos" th:field="*{apellidos}" required>
               </div>
+            
+           
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Direccion:</label>
-                <input type="text" class="form-control" id="direccion" name="direccion" th:field="*{direccion}">
-              </div>
-              <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Telefono:</label>
-                <input type="number" class="form-control" id="telefono" name="telefono" th:field="*{telefono}">
-              </div>
-              <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Email:</label>
-                <input type="number" class="form-control" id="correo" name="correo" th:field="*{correo}">
+                <label for="recipient-name" class="col-form-label">Comentario:</label>
+                <input type="text" class="form-control" id="comentarios" name="comentarios" th:field="*{comentarios}">
               </div>
               <div class="mb-3">
                 <label class="col-md-2" for="cargos">Cargo: </label>
@@ -120,7 +107,7 @@
               <div class="mb-3">
                 <label class="col-md-2" for="cargos">Area: </label>
                 <select th:field="*{area.id}" class="form-control form-control-sm col-md-6" id="areas">
-                  <option th:each="a:${areas}" th:value="${a.id}" th:text="${a.area}"></option>
+                  <option th:each="a:${areas}" th:value="${a.id}" th:text="${a.prueba}"></option>
                 </select>
               </div>
 
@@ -147,7 +134,7 @@
               <div class="mb-3">
                 <input type="hidden" th:field="*{id}">
                 <label for="recipient-name" class="col-form-label">Areas:</label>
-                <input type="text" class="form-control" id="area" name="area" th:field="*{area}">
+                <input type="text" class="form-control" id="prueba" name="prueba" th:field="*{prueba}" autofocus>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
